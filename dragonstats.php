@@ -154,10 +154,12 @@ foreach ($ip as $ipaddy ) {
 		echo "<div id=\"cbip-table-1-asic\"></div>";
 		echo "</td>";
 
-                ## miner type 
+                ## miner type
+                $miner_miner = find_element("Description", $stats);
+                $miner_type = strpos($miner_miner, 'cgminer') !== false ? ' (T1)' : ' (B29)';
                 echo "<td class=\"cbi-value-field\">";
                 if ( $cc == 1 ) {
-                        echo "<div id=\"cbi-table-1-elapsed\">" . find_element("Description", $stats) . "</div>";
+                        echo "<div id=\"cbi-table-1-elapsed\">" . $miner_miner . $miner_type . "</div>";
                 } else {
                         echo "<div id=\"cbi-table-1-elapsed\"></div>";
                 }
