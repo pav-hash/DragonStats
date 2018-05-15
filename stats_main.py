@@ -18,6 +18,7 @@ class CgminerAPI(object):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         try:
+            sock.settimeout(3)
             sock.connect((self.host, self.port))
             payload = {"command": command}
             if arg is not None:

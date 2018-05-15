@@ -1,15 +1,15 @@
 
 <?php
 
-    # Define all your miners IP addresses here that you would
-    # like to have monitored.
-
-    $ip = array("192.168.100.160", "192.168.100.161", "192.168.100.162", "192.168.100.163", "192.168.100.164", "192.168.100.170", "192.168.100.171");
-
     # NOTE:  There is nothing below this line that needs to be edited.  Doing so has the
     # potential to cause issues with the rendering of the webpage.
 
-    # written by pav_hash
+    # written by pav_hash	05/12/2018
+    #
+    # revision: 05/15/2018 - include button to auto-scan all miners in your /24 subnet
+    #		auto-scanning the complete /24 should take between 5-20 seconds depending upon number of machines.
+    #
+    #
     #
     # donations gladly accepted  3CsdpkawMuhSqBrdvCcHacSyuzmjzHVTTR  (btc)  
     #				 DsTyn6kv8NjY83LY4RminGTP2TF7DQBpeAw (dcr)
@@ -17,7 +17,48 @@
 
 
 ##########################################################################
+# functins
 ##########################################################################
+
+function get_all_dragon_ips() {
+	#get all ips that are alive via ping and save off to a file
+	$cmd = exec("rm /tmp/found_ips.lst");
+	$cmd = exec("nmap -T5 -sP 192.168.100.0-255 | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >/tmp/found_ips.lst");
+
+	$cmd = exec('rm /tmp/dragon_ips.lst');
+
+        $ip_list = file('/tmp/found_ips.lst');
+        foreach ( $ip_list as $ipaddy ) {
+		$ipaddy = str_replace("\n", "", str_replace("\r","",$ipaddy));
+		$_stat = exec( 'python ./get_stats.py ' . $ipaddy . ' devs ' );
+		if ( strpos($_stat, 'STATUS') !== false ) {
+			$cmd = exec('echo ' . $ipaddy . ' >>/tmp/dragon_ips.lst');
+		} 
+        }
+}
+
+function get_all_miners() {
+	$ips = str_replace("\r", '', file('/tmp/dragon_ips.lst'));
+	return $ips;
+}
+
+######################### end functions ##################################
+
+
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['get_all_dragon_ips']))
+{
+	get_all_dragon_ips();
+	header('Location:'.$_SERVER['PHP_SELF']);
+}
+
+
+# check if the ip_table.lst file exists..
+if (!file_exists('/tmp/dragon_ips.lst')) {
+	get_all_dragon_ips();
+}	
+
+$ip = get_all_miners();
+
 
 ?>
 
@@ -68,7 +109,17 @@
                <strong>Java Script required!</strong><br /> You must enable Java Script or LuCI will not work properly.
            </div>
         </noscript>
+
         <h2 style="padding-bottom:10px;"><a id="content" name="content">Status <span style='float: right' id='ct'></span></a></h2>
+
+<table id="ant_devs" class="cbi-section-table">
+<tr><th>
+<form action="dragonstats.php" method="post">
+    <input type="submit" name="get_all_dragon_ips" value="Rescan Network" style="font-size:12pt;color:white; background-color:green;border:2px solid #336600;padding:3px; />
+</form>
+</th></tr>
+</table>
+
         <div class="cbi-map" id="cbi-cgminerstatus">
             <!-- tblsection -->
             <!-- tblsection -->
@@ -138,6 +189,7 @@ foreach ($ip as $ipaddy ) {
 	echo "<div id=\"cbip-table-1-chain\"></div>";
 	echo "</tr></td>";
 
+	$ipaddy = str_replace("\n", "", str_replace("\r","",$ipaddy));
 
 	$_stats = exec('python ./get_stats.py ' . $ipaddy . ' devs 2>&1');	
 
@@ -155,8 +207,8 @@ foreach ($ip as $ipaddy ) {
 		echo "</td>";
 
                 ## miner type
-                $miner_miner = find_element("Description", $stats);
-                $miner_type = strpos($miner_miner, 'cgminer') !== false ? ' (T1)' : ' (B29)';
+		$miner_miner = find_element("Description", $stats);
+		$miner_type = strpos($miner_miner, 'cgminer') !== false ? ' (T1)' : ' (B29)';
                 echo "<td class=\"cbi-value-field\">";
                 if ( $cc == 1 ) {
                         echo "<div id=\"cbi-table-1-elapsed\">" . $miner_miner . $miner_type . "</div>";
