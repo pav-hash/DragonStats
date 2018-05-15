@@ -20,10 +20,16 @@
 # functins
 ##########################################################################
 
+
 function get_all_dragon_ips() {
 	#get all ips that are alive via ping and save off to a file
+	$my_subnet = $_SERVER['SERVER_ADDR'];
+	$my_subnet = substr( $_SERVER['SERVER_ADDR'], 0, strrpos( $my_subnet, "." ) ) . '.0-255';
+
 	$cmd = exec("rm /tmp/found_ips.lst");
-	$cmd = exec("nmap -T5 -sP 192.168.100.0-255 | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >/tmp/found_ips.lst");
+
+	$cmd = "nmap -T5 -sP $my_subnet | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >/tmp/found_ips.lst";
+	$nop = exec( $cmd );
 
 	$cmd = exec('rm /tmp/dragon_ips.lst');
 
