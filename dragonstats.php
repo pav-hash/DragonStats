@@ -48,6 +48,48 @@ function get_all_miners() {
 	return $ips;
 }
 
+function find_element( $what, $_string, $instance ) {
+        if ( $instance === NULL )
+                $instance = 1;
+
+        $count = 1;
+        $what = $what . ":";
+        foreach ( $_string as $_element ) {
+                if ( substr( $_element, 0, strlen( $what ) ) === $what ) {
+                        if ( $instance == $count ) {
+                                list( $base, $value ) = explode( ": ", $_element );
+                                return str_replace( "}]", "", $value );
+                        } else {
+                                $count = $count + 1;
+                        }
+                }
+        }
+        return "";
+}
+
+function find_sub_element( $what, $_string, $instance ) {
+        if ( $instance === NULL )
+                $instance = 1;
+
+        $count = 1;
+        $what = $what . ":";
+        foreach ( $_string as $_element ) {
+                if ( strpos( $_element, $what ) !== false ) {
+                        if ( $instance == $count ) {
+				if ( substr_count( $_element, ':' ) > 1 ) {
+					list( $blah, $base, $value ) = explode( ": ", $_element );
+				} else {
+                                	list( $base, $value ) = explode( ": ", $_element );
+				}
+                                return str_replace( "}]", "", $value );
+                        } else {
+                                $count = $count + 1;
+                        }
+                }
+        }
+        return "";
+}
+
 ######################### end functions ##################################
 
 
@@ -136,12 +178,13 @@ $ip = get_all_miners();
             <table id="ant_devs" class="cbi-section-table">
                 <tr class="cbi-section-table-titles">
                 <th class="cbi-section-table-cell">Miner IP</th>
-                <th class="cbi-section-table-cell">Miner Type</th>
+                <th class="cbi-section-table-cell">Miner Name (Type)</th>
 		<th class="cbi-section-table-cell">Running Since</th>
                 <th class="cbi-section-table-cell">Hashboard #</th>
                 <th class="cbi-section-table-cell">Status</th>
                 <th class="cbi-section-table-cell">Accepted</th>
                 <th class="cbi-section-table-cell">Temp</th>
+		<th class="cbi-section-table-cell">Fan Speed</th>
 		<th class="cbi-section-table-cell">Hashrate (1m)</th>
 		<th class="cbi-section-table-cell">Hashrate (avg)</th>
 		<th class="cbi-section-table-cell">HW Errors</th>
@@ -154,6 +197,7 @@ $ip = get_all_miners();
                 <th class="cbi-section-table-cell"></th>
                 <th class="cbi-section-table-cell"></th>
 		<th class="cbi-section-table-cell"></th>
+		<th class="cbi-section-table-cell"></th>
                 <th class="cbi-section-table-cell"></th>
 		<th class="cbi-section-table-cell"></th>
                 <th class="cbi-section-table-cell"></th>
@@ -164,25 +208,6 @@ $ip = get_all_miners();
 
 <?php
 
-
-function find_element( $what, $_string, $instance ) {
-	if ( $instance === NULL )
-		$instance = 1;
-
-	$count = 1;
-	$what = $what . ":";
-        foreach ( $_string as $_element ) {
-		if ( substr( $_element, 0, strlen( $what ) ) === $what ) {
-			if ( $instance == $count ) {
-				list( $base, $value ) = explode( ": ", $_element );
-				return str_replace( "}]", "", $value );
-			} else {
-				$count = $count + 1;
-			}
-		}
-        }
-        return "";
-}
 
 
 
@@ -198,9 +223,13 @@ foreach ($ip as $ipaddy ) {
 	$ipaddy = str_replace("\n", "", str_replace("\r","",$ipaddy));
 
 	$_stats = exec('python ./get_stats.py ' . $ipaddy . ' devs 2>&1');	
-
 	$stats = str_replace( "'", "", str_replace( "u'", "", explode(", u",$_stats) ) );
 
+	$_pools = exec('python ./get_stats.py ' . $ipaddy . ' pools 2>&1');
+	$pools = str_replace( "'", "", str_replace( "u'", "", explode(", u",$_pools) ) );
+
+        $_fullstats = exec('python ./get_stats.py ' . $ipaddy . ' stats 2>&1');     
+        $fullstats = str_replace( "'", "", str_replace( "u'", "", explode(", u",$_fullstats) ) );
 
 
 	for ($cc = 1; $cc <= 3; $cc++) {
@@ -215,6 +244,15 @@ foreach ($ip as $ipaddy ) {
                 ## miner type
 		$miner_miner = find_element("Description", $stats);
 		$miner_type = strpos($miner_miner, 'cgminer') !== false ? ' (T1)' : ' (B29)';
+
+
+		for ($pp = 1; $pp <= 3; $pp++) {
+			if ( find_sub_element("Stratum Active", $pools, $pp) === "True" ) {
+				$miner_miner = find_element("User", $pools, $pp );
+				break;
+			}
+		}
+
                 echo "<td class=\"cbi-value-field\">";
                 if ( $cc == 1 ) {
                         echo "<div id=\"cbi-table-1-elapsed\">" . $miner_miner . $miner_type . "</div>";
@@ -260,6 +298,16 @@ foreach ($ip as $ipaddy ) {
 		echo "<div id=\"cbi-table-1-temp\">" . find_element("Temperature", $stats, $cc ) . "</div>";
 		echo "<div id=\"cbip-table-1-temp\"></div>";
 		echo "</td>";
+
+                ## fan speed 
+                echo "<td class=\"cbi-value-field\">";
+		if ( $cc == 1 ) {
+	                echo "<div id=\"cbi-table-1-temp\">" . find_element("Fan duty", $fullstats ) . "</div>";
+		} else {
+			echo "<div id=\"cbi-table-1-temp\"></div>";
+		}
+                echo "<div id=\"cbip-table-1-temp\"></div>";
+                echo "</td>";
 
                 ## hashrate 1m
                 echo "<td class=\"cbi-value-field\">";
