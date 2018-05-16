@@ -16,6 +16,23 @@
  
 
 
+
+#### Custom define statements you may optionally enable ####
+
+
+# NOTE: setting this to true will REALLY slow down ui rendering!!
+$show_mac_addy = false;
+
+
+
+
+#### End of custom defines ####
+
+
+
+
+
+
 ##########################################################################
 # functins
 ##########################################################################
@@ -213,6 +230,12 @@ $ip = get_all_miners();
 
 foreach ($ip as $ipaddy ) {
 
+	if ( $show_mac_addy === true ) {
+		$cmd = "arp -a | grep " . $ipaddy . "  | cut -f 4 -d ' ' 2>&1 ";
+		$mac_addy = exec( $cmd );
+		list( $_noop1, $_noop2, $_noop3, $mac_addy ) = explode( " ", $mac_addy );
+	}
+
 	## chain number
 	echo "<tr class=\"cbi-section-table-row cbi-rowstyle-1\" id=\"cbi-table-1\">";
 	echo "<td class=\"cbi-value-field\">";
@@ -237,7 +260,11 @@ foreach ($ip as $ipaddy ) {
 	   try {
 		## miner ip address
 		echo "<td class=\"cbi-value-field\">";
-		echo "<div id=\"cbi-table-1-asic\"></div>";
+		if ( $cc == 1 && $show_mac_addy ) {
+			echo "<div id=\"cbi-table-1-asic\">mac address: $mac_addy</div>";
+		} else {
+			echo "<div id=\"cbi-table-1-asic\"></div>";
+		}
 		echo "<div id=\"cbip-table-1-asic\"></div>";
 		echo "</td>";
 
