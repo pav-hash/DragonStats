@@ -231,9 +231,8 @@ $ip = get_all_miners();
 foreach ($ip as $ipaddy ) {
 
 	if ( $show_mac_addy === true ) {
-		$cmd = "arp -a | grep " . $ipaddy . "  | cut -f 4 -d ' ' 2>&1 ";
+		$cmd = "arp -a | grep " . str_replace( "\n", "", str_replace( "\r", "", $ipaddy ) ) . "  | cut -f 4 -d ' ' 2>&1 ";
 		$mac_addy = exec( $cmd );
-		list( $_noop1, $_noop2, $_noop3, $mac_addy ) = explode( " ", $mac_addy );
 	}
 
 	## chain number
