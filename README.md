@@ -1,5 +1,8 @@
 # DragonStats
 
+This is designed to be run under linux with either apache or nginx.  The machine could
+be as simple as a raspberry pi!
+
 Simply place all the files into a web enabled directory.
 Once that is done, open up a browser and go to:  http://yourdomain.com/dragonstats.php
 
