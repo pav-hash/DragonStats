@@ -20,6 +20,5 @@ View the 'status_demo.jpg' file to get an idea on what all information is displa
 If you find this utility of use, please consider donating.
 
  3CsdpkawMuhSqBrdvCcHacSyuzmjzHVTTR (btc)
- 
  DsTyn6kv8NjY83LY4RminGTP2TF7DQBpeAw (dcr)
  
