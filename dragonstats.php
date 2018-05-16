@@ -1,13 +1,19 @@
 
 <?php
 
-    # NOTE:  There is nothing below this line that needs to be edited.  Doing so has the
-    # potential to cause issues with the rendering of the webpage.
+    # This code is licensed under the GNU General Public License v2.0
+    #
+    # Please leave any/all comments, names, dates, donation addresses, ect. in place as is.
+    #
 
+    #
     # written by pav_hash	05/12/2018
     #
     # revision: 05/15/2018 - include button to auto-scan all miners in your /24 subnet
     #		auto-scanning the complete /24 should take between 5-20 seconds depending upon number of machines.
+    #
+    # revision: 05/16/2018 - include the ability to display mac addresses, along with having the ability to span
+    #		subnets looking for miners.
     #
     #
     #
@@ -24,13 +30,28 @@
 $show_mac_addy = false;
 
 
+# If you have subnets that span across multiple subnets, add all the subnets here.
+# For example:  $multi_subnets = array( "192.168.1.1-100", "192.168.100.1-50", "10.10.0.5-15" );
+# The '1-100' in the above example defines that you have been assigned ip's ending in .1 THROUGH .100
+#
+# NOTE: Your server must be able to ping across subnets for this to work properly.
+#
+# The array is empty by default.
+#
+$multi_subnets = array();
+
 
 
 #### End of custom defines ####
 
 
-
-
+#
+#
+#
+############ EDITING BELOW THIS LINE IS NOT RECOMMENDED #################
+#
+#
+#
 
 
 ##########################################################################
@@ -45,8 +66,15 @@ function get_all_dragon_ips() {
 
 	$cmd = exec("rm /tmp/found_ips.lst");
 
-	$cmd = "nmap -T5 -sP $my_subnet | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >/tmp/found_ips.lst";
-	$nop = exec( $cmd );
+	if ( count( $multi_subnets ) >= 1 ) {
+		foreach ( $multi_subnets as $isub ) {
+			$cmd = "nmap -T5 -sP $isub | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >>/tmp/found_ips.lst";
+			$nop = exec( $cmd );
+		}
+	} else {
+		$cmd = "nmap -T5 -sP $my_subnet | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >/tmp/found_ips.lst";
+		$nop = exec( $cmd );
+	}
 
 	$cmd = exec('rm /tmp/dragon_ips.lst');
 
@@ -84,7 +112,7 @@ function find_element( $what, $_string, $instance ) {
         return "";
 }
 
-function find_sub_element( $what, $_string, $instance ) {
+function find_active_stratum( $what, $_string, $instance ) {
         if ( $instance === NULL )
                 $instance = 1;
 
@@ -94,7 +122,7 @@ function find_sub_element( $what, $_string, $instance ) {
                 if ( strpos( $_element, $what ) !== false ) {
                         if ( $instance == $count ) {
 				if ( substr_count( $_element, ':' ) > 1 ) {
-					list( $blah, $base, $value ) = explode( ": ", $_element );
+					list( $noop, $base, $value ) = explode( ": ", $_element );
 				} else {
                                 	list( $base, $value ) = explode( ": ", $_element );
 				}
@@ -269,11 +297,11 @@ foreach ($ip as $ipaddy ) {
 
                 ## miner type
 		$miner_miner = find_element("Description", $stats);
-		$miner_type = strpos($miner_miner, 'cgminer') !== false ? ' (T1)' : ' (B29)';
+		$miner_type = strpos($miner_miner, 'cgminer') !== false ? ' (T1)' : ' (B29/D9)' ;
 
 
 		for ($pp = 1; $pp <= 3; $pp++) {
-			if ( find_sub_element("Stratum Active", $pools, $pp) === "True" ) {
+			if ( find_active_stratum("Stratum Active", $pools, $pp) === "True" ) {
 				$miner_miner = find_element("User", $pools, $pp );
 				break;
 			}
