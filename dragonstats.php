@@ -355,7 +355,7 @@ foreach ($ip as $ipaddy ) {
 
                 ## fan speed 
                 echo "<td class=\"cbi-value-field\">";
-		if ( $cc == 1 ) {
+		if ( $cc == 2 ) {
 	                echo "<div id=\"cbi-table-1-temp\">" . find_element("Fan duty", $fullstats ) . "</div>";
 		} else {
 			echo "<div id=\"cbi-table-1-temp\"></div>";
