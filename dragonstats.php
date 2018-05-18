@@ -65,43 +65,46 @@ $condense_listings = false;
 
 
 function get_all_dragon_ips() {
+	if ( !is_dir( './lists' ) ) {
+		mkdir( './lists', 0755 );
+	}
 	#get all ips that are alive via ping and save off to a file
 	$my_subnet = $_SERVER['SERVER_ADDR'];
 	$my_subnet = substr( $_SERVER['SERVER_ADDR'], 0, strrpos( $my_subnet, "." ) ) . '.0-255';
 
-	$cmd = exec("rm /tmp/found_ips.lst");
+	$cmd = exec("rm ./lists/found_ips.lst");
 
 	if ( count( $multi_subnets ) >= 1 ) {
 		foreach ( $multi_subnets as $isub ) {
-			$cmd = "nmap -T5 -sP $isub | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >>/tmp/found_ips.lst";
+			$cmd = "nmap -T5 -sP $isub | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >>./lists/found_ips.lst";
 			$nop = exec( $cmd );
 		}
 	} else {
-		$cmd = "nmap -T5 -sP $my_subnet | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >/tmp/found_ips.lst";
+		$cmd = "nmap -T5 -sP $my_subnet | grep 'Nmap scan report for ' | cut -f 5 -d ' ' >./lists/found_ips.lst";
 		$nop = exec( $cmd );
 	}
 
-	$cmd = exec('rm /tmp/dragon_ips.lst');
+	$cmd = exec('rm ./lists/dragon_ips.lst');
 
-        $ip_list = file('/tmp/found_ips.lst');
+        $ip_list = file('./lists/found_ips.lst');
         foreach ( $ip_list as $ipaddy ) {
 		$ipaddy = str_replace("\n", "", str_replace("\r","",$ipaddy));
 		$_stat = exec( 'python ./get_stats.py ' . $ipaddy . ' devs ' );
 		if ( strpos($_stat, 'STATUS') !== false ) {
-			$cmd = exec('echo ' . $ipaddy . ' >>/tmp/dragon_ips.lst');
+			$cmd = exec('echo ' . $ipaddy . ' >>./lists/dragon_ips.lst');
 		} 
         }
 }
 
 function get_all_miners() {
-	$ips = str_replace("\r", '', file('/tmp/dragon_ips.lst'));
+	$ips = str_replace("\r", '', file('./lists/dragon_ips.lst'));
 	return $ips;
 }
 
 function remove_ip( $rip ) {
-	$cmd = "cat /tmp/dragon_ips.lst |grep -v " . $rip . " > /tmp/dragon_ips_tmp.lst";
+	$cmd = "cat ./lists/dragon_ips.lst |grep -v " . $rip . " > ./lists/dragon_ips_tmp.lst";
 	$cmd = exec( $cmd );
-	$cmd = copy( '/tmp/dragon_ips_tmp.lst', '/tmp/dragon_ips.lst' );
+	$cmd = copy( './lists/dragon_ips_tmp.lst', './lists/dragon_ips.lst' );
 }
 
 function find_element( $what, $_string, $instance ) {
@@ -173,7 +176,7 @@ remove_ip( $_POST['remove_ip'] );
 
 
 # check if the ip_table.lst file exists..
-if (!file_exists('/tmp/dragon_ips.lst')) {
+if (!file_exists('./lists/dragon_ips.lst')) {
 get_all_dragon_ips();
 }	
 
