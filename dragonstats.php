@@ -65,8 +65,8 @@ $condense_listings = false;
 
 
 function get_all_dragon_ips() {
-	if ( !is_dir( './lists' ) ) {
-		mkdir( './lists', 0755 );
+	if ( !is_dir( $_SERVER['DOCUMENT_ROOT'] . '/lists' ) ) {
+		mkdir( $_SERVER['DOCUMENT_ROOT']  . '/lists', 0755, true );
 	}
 	#get all ips that are alive via ping and save off to a file
 	$my_subnet = $_SERVER['SERVER_ADDR'];
