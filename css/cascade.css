@@ -15,7 +15,7 @@ html {
 
 body {
 	color: #ffffff;
-	background-color: #918ca0;
+	background-color: #3d9970;
 	background-position: bottom center;
 	background-repeat: repeat-x;
 	font-family: Verdana, Arial, sans-serif;
@@ -179,9 +179,55 @@ div.hostinfo {
 	float: right;
 }
 
+.curr_hw_text {
+    font-size: 12pt;
+    font-weight: 700;
+}
+
+.curr_hashrate {
+    background-color: #20c997;
+    color: white;
+    display: block;
+    height: 20px;
+    width: 70%;
+    margin: auto;
+    border-top: 1px solid #5a6070;
+    border-left: 1px solid #5a6070;
+    border-right: 1px solid #5a6070;
+    border-bottom: 1px solid #5a6070;
+    border-radius: 2px;
+    border-color: #5a6070;
+}
+
+.rescanbtn {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.rescanbtn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
 
 .remove_ip {
-    background-color: black;
+    background-color: #f57e22;
     color: white;
     display: block;
     height: 30px;
@@ -298,12 +344,31 @@ textarea#syslog {
 
 #maincontainer {
 	clear: both;
-	width: 96%;
+	width: auto;
 	margin: 0 auto;
 	height:100%;
 }
 
+#minercontent {
+	width: auto;
+        padding: 0.5em;
+        background: #ffffff;
+        color: #000000;
+        font-size: 90%;
+}
+
+#cbi-table-table {
+	width: auto;
+	background: #ffffff;
+}
+
+#cbi-cgminerstatus {
+	width: auto;
+}
+
 #maincontent {
+	comment: pav_hash;
+	width: auto;
 	padding: 0.5em;
 	background: #f5f5f5;
 	color: #000000;
@@ -341,6 +406,7 @@ textarea#syslog {
 }
 
 .cbi-section {
+	width: auto;
 	margin-bottom: 0.5em;
 	padding: 0.5em 1em;
 	border: 1px dotted #555555;
@@ -702,6 +768,21 @@ div.cbi-value:hover {
 	line-height: 1.8em;
 }
 
+.cbi-value-name {
+        width: 28%;
+        max-width: 90px;
+	word-wrap: break-word;
+        margin-left: 40%;
+        padding: 0.25em 0;
+}
+
+div.cbi-value-name {
+	width: 38%;
+	max-width: 150px;
+	margin-left: 40%;
+	padding: 0.25em 0;
+}
+
 div.cbi-value-field {
 	width: 58%;
 	margin-left: 40%;
@@ -766,7 +847,7 @@ div.cbi-section-remove {
 }
 
 table.cbi-section-table {
-	width: 100%;
+	width: 95%;
 	font-size: 95%;
 }
 
