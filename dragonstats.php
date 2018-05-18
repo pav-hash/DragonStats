@@ -93,6 +93,12 @@ function get_all_miners() {
 	return $ips;
 }
 
+function remove_ip( $rip ) {
+	$cmd = "cat /tmp/dragon_ips.lst |grep -v " . $rip . " > /tmp/dragon_ips_tmp.lst";
+	$cmd = exec( $cmd );
+	$cmd = copy( '/tmp/dragon_ips_tmp.lst', '/tmp/dragon_ips.lst' );
+}
+
 function find_element( $what, $_string, $instance ) {
         if ( $instance === NULL )
                 $instance = 1;
@@ -144,6 +150,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['get_all_dragon_ips']))
 	header('Location:'.$_SERVER['PHP_SELF']);
 }
 
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['remove_ip']))
+{
+	remove_ip( $_POST['remove_ip'] );
+#	header('Location:'.$_SERVER['PHP_SELF']);
+}
+
+
 
 # check if the ip_table.lst file exists..
 if (!file_exists('/tmp/dragon_ips.lst')) {
@@ -182,6 +195,7 @@ $ip = get_all_miners();
 		tt = display_c();
 	}
 </script>
+
 
 </head>
 <body onload=display_ct()>
@@ -233,6 +247,7 @@ $ip = get_all_miners();
 		<th class="cbi-section-table-cell">Hashrate (1m)</th>
 		<th class="cbi-section-table-cell">Hashrate (avg)</th>
 		<th class="cbi-section-table-cell">HW Errors</th>
+		<th class="cbi-section-table-cell"></th>
                 </tr>
                 <tr class="cbi-section-table-descr">
                 <th class="cbi-section-table-cell"></th>
@@ -246,6 +261,7 @@ $ip = get_all_miners();
                 <th class="cbi-section-table-cell"></th>
 		<th class="cbi-section-table-cell"></th>
                 <th class="cbi-section-table-cell"></th>
+		<th class="cbi-section-table-cell"></th>
                 </tr>
    
 
@@ -297,7 +313,16 @@ foreach ($ip as $ipaddy ) {
 
                 ## miner type
 		$miner_miner = find_element("Description", $stats);
-		$miner_type = strpos($miner_miner, 'cgminer') !== false ? ' (T1)' : ' (B29/D9)' ;
+		if ( strpos( $miner_miner, 'cgminer 4.9.0' ) !== false ) {
+			## is this an antminer??
+			$miner_type = ' (antminer)';
+		} elseif ( strpos( $miner_miner, 'cgminer' ) !== false ) {
+			$miner_type = ' (T1)';
+		} elseif ( strpos( $miner_miner, 'sgminer' ) !== false ) {
+			$miner_type = ' (B29/D9)';
+		} else {
+			$miner_type = ' (Unknown)';
+		}	
 
 
 		for ($pp = 1; $pp <= 3; $pp++) {
@@ -379,6 +404,17 @@ foreach ($ip as $ipaddy ) {
                 echo "<td class=\"cbi-value-field\">";
                 echo "<div id=\"cbi-table-1-temp\">" . find_element("Hardware Errors", $stats, $cc) . "</div>";
                 echo "<div id=\"cbip-table-1-temp\"></div>";
+                echo "</td>";
+
+                ## remove miner ip address
+                echo "<td class=\"cbi-value-field\">";
+                if ( $cc == 2 ) {
+#			echo "<a id=\"remove_ip\" href=" . $_SERVER['PHP_SELF'] . "?remove_ip=" . $ipaddy . ">Remove Miner</a>";
+                        echo "<form action=" . $_SERVER['PHP_SELF'] . " method='post'> <button type='submit' name='remove_ip' value='$ipaddy' class='remove_ip'>Remove Miner</button></form>";
+                } else {
+                        echo "<div id=\"cbi-table-1-asic\"></div>";
+                }
+                echo "<div id=\"cbip-table-1-asic\"></div>";
                 echo "</td>";
 
 		echo "</tr>";
