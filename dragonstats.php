@@ -212,12 +212,14 @@ function display_ct() {
 	tt = display_c();
 }
 </script>
+
 </head>
 
 
 <!-- ############################################ -->
 
-<body class="lang_en" onload=display_ct()>
+<body onload="display_ct()" class="lang_en">
+
 <p class="skiplink">
 	<span id="skiplink1"><a href="#navigation">Skip to navigation</a></span>
 	<span id="skiplink2"><a href="#content">Skip to content</a></span>
@@ -243,7 +245,7 @@ function display_ct() {
 				<strong>Java Script required!</strong><br /> You must enable Java Script in your browser or LuCI will not work properly.
 			</div>
 		</noscript>
-		<h2 style="padding-bottom:10px;"><a id="content" name="content">Miner Status</a></h2>
+		<h2 style="padding-bottom:10px;"><a id="content" name="content">Miner Status</a><a style="float:right" id="content"><span id='ct'></span></a></h2>
 
 		<p><div align='center'>
 			<form action="<?php $_SERVER['PHP_SELF'] ?>" method='post'> <button type='submit' name='get_all_dragon_ips' value='$ipaddy' class='rescanbtn'>Rescan Network</button></form>
