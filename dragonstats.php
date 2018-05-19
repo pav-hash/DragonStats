@@ -193,7 +193,7 @@ $ip = get_all_miners();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="refresh" content="20" />
+<meta http-equiv="refresh" content="60" />
 <link rel="stylesheet" type="text/css" media="screen" href="/css/cascade.css" />
 <title>Dragon Miner</title>
 
