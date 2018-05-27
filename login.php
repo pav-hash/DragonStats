@@ -143,9 +143,9 @@ list( $_uname, $_upass ) = explode( ":", $passfile );
                   $_SESSION['logged_in'] = true;
                   $_SESSION['timeout'] = time();
 
-		   header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . 'dragonstats.php');
-               } else {
-		   header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . 'login.php');
+		   header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . '/dragonstats.php');
+               } else { 
+		   header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . '/login.php');
 		   exit;
                }
             }

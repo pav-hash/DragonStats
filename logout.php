@@ -30,7 +30,7 @@ if( isset( $_SESSION['logged_in'] ) )
 
 session_destroy();
 
-header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . 'login.php');
+header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . '/login.php');
 
 ?>
 

@@ -29,12 +29,12 @@
 
 
 	if ( !isset( $_SESSION['logged_in'] ) ) {
-		header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . 'login.php');
+		header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . '/login.php');
 		exit;
 	}
 
 	if ( isset( $_SESSION['logged_in'] ) and $_SESSION['logged_in'] !== true ) {
-		header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . 'login.php');
+		header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . '/login.php');
 		exit;
 	}
 

@@ -29,35 +29,34 @@
 
 
 	if ( !isset( $_SESSION['logged_in'] ) ) {
-		header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . 'login.php');
+		header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . '/login.php');
 		exit;
 	}
 
 	if ( isset( $_SESSION['logged_in'] ) and $_SESSION['logged_in'] !== true ) {
-		header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . 'login.php');
+		header('Location: http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']) . '/login.php');
 		exit;
 	}
 
+        function save_settings() {
+                $setupfile = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_settings.inc';
+                if ( file_exists( $setupfile ) ) unlink( $setupfile );
+                        file_put_contents( $setupfile, '{ "dragonstats": { "refresh":"' . $_POST['inputRefresh'] . '","auser":"' . $_POST['inputUser'] . '","apass":"' . $_POST['inputPassword'] . '" } }' );
 
-
-	function save_settings() {
-		if ( file_exists( $_SERVER['DOCUMENT_ROOT'] . '/dragonstats_settings.inc' ) ) unlink( $_SERVER['DOCUMENT_ROOT'] . '/dragonstats_settings.inc' );
-			file_put_contents( $_SERVER['DOCUMENT_ROOT'] . '/dragonstats_settings.inc', '{ "dragonstats": { "refresh":"' . $_POST['inputRefresh'] . '","auser":"' . $_POST['inputUser'] . '","apass":"' . $_POST['inputPassword'] . '" } }' );
-
-		if ( file_exists( $_SERVER['DOCUMENT_ROOT'] . '/dragonstats_settings.inc' ) ) {
-			$error_msg = " Settings Updated.";
-		} else {
-			$error_msg = " Settings NOT updated.";
-		}
-	}
-
+                if ( file_exists( $setupfile ) ) {
+                        $error_msg = " Settings Updated.";
+                } else {
+                        $error_msg = " Settings NOT updated.";
+                }
+        }
 
 	function get_refresh($_json) {
 		return get_json_element( $_json, 'refresh');
 	}
 
 	function get_settings() {
-		$_string = file_get_contents( $_SERVER['DOCUMENT_ROOT'] . '/dragonstats_settings.inc' );
+		$setupfile = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_settings.inc';
+		$_string = file_get_contents( $setupfile );
 		return $_string;
 	}
 
