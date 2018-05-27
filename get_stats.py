@@ -7,7 +7,7 @@ import sys
 import StringIO
 
 def main():
-	cgminer = CgminerAPI(argv[1])
+	cgminer = CgminerAPI( argv[1] )
 	summary = "cgminer." + argv[2] + "()"
 	results = eval(summary)
 	print results
