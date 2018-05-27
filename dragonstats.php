@@ -192,7 +192,7 @@ if( $_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['remove_ip']))
 
 if( $_SERVER['REQUEST_METHOD'] == "GET" and isset($_GET['condensed']))
 {
-	if ( $_GET['condensed'] === 'false' ) {
+	if ( $_GET['condensed'] === 'false' || $_GET['condensed'] === 'null' ) {
 		$condense_listings = true;
 	} else { 
 		$condense_listings = false;
