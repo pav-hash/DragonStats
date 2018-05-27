@@ -1,0 +1,156 @@
+
+
+/* ---------------------------------------------------
+    LOGO
+----------------------------------------------------- */
+.ds-logo {
+  float: none;
+  margin: 10px auto;
+  width: 210px;
+  height: 95px;
+}
+.dark-skin .ds-logo {
+  background: url("../img/logo.png") no-repeat center;
+  background-size: 210px 95px;
+}
+.light-skin .ds-logo {
+  background: url("../images/dragon_stats.jpg") no-repeat center;
+  background-size: 210px 95px;
+}
+
+.light-skin .badge-fan {
+  background-color: #626262;
+  color: #ffffff;
+  width: 33px;
+  height: 25px;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 18px;
+}
+
+
+.rescanbtn {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+    border-top: 1px solid #5a6070;
+    border-left: 1px solid #5a6070;
+    border-right: 1px solid #5a6070;
+    border-bottom: 1px solid #5a6070;
+    border-radius: 25px;
+    border-color: #5a6070;
+}
+
+.rescanbtn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+.curr_hashrate {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #20c997;
+    color: white;
+    display: block;
+    height: 25px;
+    line-height: 23px;
+    width: 60px;
+    margin: auto;
+    border-top: 1px solid #5a6070;
+    border-left: 1px solid #5a6070;
+    border-right: 1px solid #5a6070;
+    border-bottom: 1px solid #5a6070;
+    border-radius: 5px;
+    border-color: #5a6070;
+}
+
+.remove_ip {
+    background-color: #f57e22;
+    color: white;
+    display: block;
+    height: 25px;
+    line-height: 20px;
+    text-decoration: none;
+    width: 60px;
+    text-align: center;
+    vertical-align: middle;
+    border-top: 1px solid #5a6070;
+    border-left: 1px solid #5a6070;
+    border-right: 1px solid #5a6070;
+    border-bottom: 1px solid #5a6070;
+    border-radius: 5px;
+    border-color: #5a6070;
+}
+
+#cbi-dragon-table {
+        width: auto;
+        background: #ffffff;
+}
+
+table.dragon-table {
+        width: auto;
+        font-size: 12px;
+}
+
+
+table.dragon-table th,
+table.dragon-table td {
+        text-align: center;
+        background-color: #fff;
+        margin: 8px;
+        padding: 6px;
+}
+
+
+.pavhash {
+  text-align: center;
+  font-size: 90%;
+  width: auto;
+}
+
+.condense_ck {
+    height: 30px;
+    width: 50%;
+    background-color: powderblue;
+	text-align: right;
+	width: auto;
+}
+
+#security_content {
+    min-height: 100vh;
+    width: 75%;
+    padding: 40px;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+/* ----------- condensed checkbox ---------- */
+
+input[id=condensed_ck] + label {
+  color: #000;
+  font-style: italic;
+}
+ 
+input[id=condensed_ck]:checked + label {
+  color: #f00;
+  font-style: normal;
+}
+
+

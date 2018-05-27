@@ -15,7 +15,8 @@ html {
 
 body {
 	color: #ffffff;
-	background-color: #3d9970;
+	background-color: #aaaaaa;
+	background-color2: #3d9970;
 	background-position: bottom center;
 	background-repeat: repeat-x;
 	font-family: Verdana, Arial, sans-serif;
@@ -36,6 +37,7 @@ a img {
 
 ul.tabmenu {
 	margin: 0;
+	background-color: #000000;
 	clear: both;
 	display: block;
 	vertical-align: bottom;
@@ -43,8 +45,17 @@ ul.tabmenu {
 	padding: 5px 0 0 5px;
 }
 
+div.tabmenu1 {
+        background-color: #aaaaaa;
+        background-image: url(tabbg.png);
+        background-repeat: repeat-x;
+        margin-top: -1px;
+        border: 1px solid #444444;
+        border-bottom: none;
+}
+
 div.tabmenu2 {
-	background-color: #AAAAAA;
+	background-color: #aaaaaa;
 	background-image: url(tabbg.png);
 	background-repeat: repeat-x;
 	margin-top: -1px;
@@ -97,7 +108,7 @@ ul.tabmenu li a:hover {
 }
 
 ul.l1 li a {
-	background-color: #AAAAAA;
+	background-color: #aaaaaa;
 	background-image: url(tabbg.png);
 	background-repeat: repeat-x;
 	border-color: #444444;
@@ -177,64 +188,6 @@ div.hostinfo {
 
 .lang_he div.hostinfo {
 	float: right;
-}
-
-.curr_hw_text {
-    font-size: 12pt;
-    font-weight: 700;
-}
-
-.curr_hashrate {
-    background-color: #20c997;
-    color: white;
-    display: block;
-    height: 20px;
-    width: 70%;
-    margin: auto;
-    border-top: 1px solid #5a6070;
-    border-left: 1px solid #5a6070;
-    border-right: 1px solid #5a6070;
-    border-bottom: 1px solid #5a6070;
-    border-radius: 2px;
-    border-color: #5a6070;
-}
-
-.rescanbtn {
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 14px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-}
-
-.rescanbtn:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
-}
-
-.remove_ip {
-    background-color: #f57e22;
-    color: white;
-    display: block;
-    height: 30px;
-    line-height: 30px;
-    text-decoration: none;
-    width: 100px;
-    text-align: center;
 }
 
 #xhr_poll_status {
@@ -769,8 +722,8 @@ div.cbi-value:hover {
 }
 
 .cbi-value-name {
-        width: 28%;
-        max-width: 90px;
+        width: 38%;
+        min-width: 90px;
 	word-wrap: break-word;
         margin-left: 40%;
         padding: 0.25em 0;
@@ -778,7 +731,7 @@ div.cbi-value:hover {
 
 div.cbi-value-name {
 	width: 38%;
-	max-width: 150px;
+	max-width: 200px;
 	margin-left: 40%;
 	padding: 0.25em 0;
 }
@@ -854,6 +807,9 @@ table.cbi-section-table {
 table.cbi-section-table th,
 table.cbi-section-table td {
 	text-align: center;
+	background-color: lime;
+	margin: 12px 12px 12px 12px;
+	padding: 12px 12px 12px 12px;
 }
 
 tr.cbi-section-table-descr th {
