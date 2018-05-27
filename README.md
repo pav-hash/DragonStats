@@ -4,7 +4,12 @@ This is designed to be run under linux with either apache or nginx.  The machine
 be as simple as a raspberry pi!
 
 Simply place all the files into a web enabled directory.
-Once that is done, open up a browser and go to:  http://yourdomain.com/dragonstats.php
+Once that is done, open up a browser and go to:  http://yourdomain.com/DragonStats/login.php
+The default username and password is shown on the login screen for you.
+
+EASIEST WAY:  just go to your base html directory and type:
+  sudo -u www-data git clone https://github.com/pav-hash/DragonStats.git
+  
 
 The first time the stats page runs, it will auto-scan your entire /24 subnet looking
 for your miners.  The auto-scan process takes between 5-20 seconds depending upon how
