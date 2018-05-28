@@ -29,6 +29,16 @@
   line-height: 18px;
 }
 
+.light-skin .badge-temp {
+  background-color: red;
+  color: white;
+  width: 28px;
+  height: 15px;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 10px;
+}
 
 .rescanbtn {
   background: #3498db;
