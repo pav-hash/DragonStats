@@ -127,15 +127,6 @@ list( $_uname, $_upass ) = explode( ":", $passfile );
             text-align: center;
             color: #017572;
          }
-	 .footer {
-	    position: fixed;
-	    left: 0;
-	    bottom: 0;
-	    width: 100%;
-	    background-color: red;
-	    color: white;
-	    text-align: center;
-	}
 	      
       </style>
       
@@ -194,7 +185,7 @@ list( $_uname, $_upass ) = explode( ":", $passfile );
         }
 ?> 
 
-  <div class="footer">
+  <div class="pav_footer">
   <div class="pavhash">Written by pav_hash --  Donations gladly accepted..<br>3CsdpkawMuhSqBrdvCcHacSyuzmjzHVTTR (btc)<br>DsTyn6kv8NjY83LY4RminGTP2TF7DQBpeAw (dcr)</div>
   </div>
 
