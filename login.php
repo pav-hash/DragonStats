@@ -30,7 +30,7 @@ $initial_setup = false;
 $file = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_pass.inc';
 $setup_file = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_settings.inc';
 
-if ( !is_file( $setup_file ) ) {
+if ( !is_file( $setup_file ) )
 	$initial_setup = true;
 
 if ( !is_file( $setup_file ) ) {
