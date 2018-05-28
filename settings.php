@@ -43,7 +43,7 @@
                 if ( file_exists( $setupfile ) )
 			unlink( $setupfile );
                         
-		file_put_contents( $setupfile, '{ "dragonstats": { "refresh":"' . $_POST['inputRefresh'] . '","auser":"' . $_POST['inputUser'] . '","apass":"' . $_POST['inputPassword'] . '" } }' );
+		file_put_contents( $setupfile, '{ "dragonstats": { "refresh":"' . $_POST['inputRefresh'] . '","otemp":"' . $_POST['inputTemp'] . '","auser":"' . $_POST['inputUser'] . '","apass":"' . $_POST['inputPassword'] . '" } }' );
 
                 if ( file_exists( $setupfile ) ) {
                         $error_msg = " Settings Updated.";
@@ -55,6 +55,10 @@
 	function get_refresh($_json) {
 		return get_json_element( $_json, 'refresh');
 	}
+
+        function get_temp($_json) {
+                return get_json_element( $_json, 'otemp' );
+        }
 
 	function get_settings() {
 		$setupfile = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_settings.inc';
@@ -199,6 +203,22 @@
 													</select>
 												</div>
 											</div>
+											<div class="form-group row">
+                                                                                                <label for="inputTemp" class="col-sm-2 col-form-label">Temp To Show Warning On Status Page</label>
+                                                                                                <div class="col-sm-10">
+                                                                                                        <select class="form-control form-control-sm" name="inputTemp" id="inputTemp">
+                                                                                                                <option <?php echo get_temp($json_settings) === "65" ? ' selected ' : '';?>value="65">65</option>
+                                                                                                                <option <?php echo get_temp($json_settings) === "68" ? ' selected ' : '';?>value="68">68</option>
+                                                                                                                <option <?php echo get_temp($json_settings) === "70" ? ' selected ' : '';?>value="70">70</option>
+                                                                                                                <option <?php echo get_temp($json_settings) === "72" ? ' selected ' : '';?>value="72">72</option>
+                                                                                                                <option <?php echo get_temp($json_settings) === "74" ? ' selected ' : '';?>value="74">74</option>
+                                                                                                                <option <?php echo get_temp($json_settings) === "76" ? ' selected ' : '';?>value="76">76</option>
+                                                                                                                <option <?php echo get_temp($json_settings) === "78" ? ' selected ' : '';?>value="78">78</option>
+                                                                                                                <option <?php echo get_temp($json_settings) === "80" ? ' selected ' : '';?>value="80">80</option>
+                                                                                                                <option <?php echo get_temp($json_settings) === "81+" ? ' selected ' : '';?>value="81+">81+</option>
+                                                                                                        </select>
+                                                                                                </div>
+                                                                                        </div>
 											<div class="form-group row">
 												<label for="inputUser" class="col-sm-2 col-form-label">Miner Admin Username</label>
 												<div class="col-sm-10">
