@@ -509,11 +509,16 @@ if ( $alive_test === '' ) {
 
 			}
 
-			## temp
-			echo "<td class=\"cbi-value-field\">";
-			echo "<div id=\"cbi-table-1-temp\">" . find_element("Temperature", $stats, $cc ) . "</div>";
-			echo "<div id=\"cbip-table-1-temp\"></div>";
-			echo "</td>";
+                        ## temp
+                        echo "<td class=\"cbi-value-field\">";
+                        $curr_temp = find_element("Temperature", $stats, $cc );
+                        if ( $curr_temp >= $overtemp ) {
+                                echo "<div id=\"cbi-table-1-temp\"><span class='badge badge-temp'>" . find_element("Temperature", $stats, $cc ) . "</span></div>";
+                        } else {
+                                echo "<div id=\"cbi-table-1-temp\">" . find_element("Temperature", $stats, $cc ) . "</div>";
+                        }
+                        echo "<div id=\"cbip-table-1-temp\"></div>";
+                        echo "</td>";
 
 			## fan speed 
 			echo "<td class=\"cbi-value-field\">";
