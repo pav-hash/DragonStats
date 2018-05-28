@@ -26,9 +26,12 @@
 ob_start();
 session_start();
 
-
+$initial_setup = false;
 $file = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_pass.inc';
 $setup_file = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_settings.inc';
+
+if ( !is_file( $setup_file ) ) {
+	$initial_setup = true;
 
 if ( !is_file( $setup_file ) ) {
 	file_put_contents( $setup_file, '' );
@@ -171,7 +174,16 @@ list( $_uname, $_upass ) = explode( ":", $passfile );
          </form>
          
       </div> 
-      
+
+<?php
+        if ( $initial_setup ) {
+?>
+                <div class="row"><div class="container"><div class="alert alert-warning"><div class="ml-2 lds-dual-ring small pt-1"></div>
+                <center>Please note the the initial setup may take awhile!</center></div></div></div>
+<?php
+        }
+?> 
+
    </body>
 </html>
 
