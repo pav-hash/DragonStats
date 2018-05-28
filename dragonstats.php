@@ -585,7 +585,7 @@ if ( $alive_test === '' ) {
 
    </div>
 
-  <div class="pavhash">Written by pav_hash --  Donations gladly accepted..<br>3CsdpkawMuhSqBrdvCcHacSyuzmjzHVTTR (btc)<br>DsTyn6kv8NjY83LY4RminGTP2TF7DQBpeAw (dcr)</div>
+  <div class="pav_bottom">Written by pav_hash --  Donations gladly accepted..<br>3CsdpkawMuhSqBrdvCcHacSyuzmjzHVTTR (btc)<br>DsTyn6kv8NjY83LY4RminGTP2TF7DQBpeAw (dcr)</div>
 
  </div> <!-- pavhash -->
  </div> <!-- content -->
