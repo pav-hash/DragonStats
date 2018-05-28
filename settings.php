@@ -40,8 +40,10 @@
 
         function save_settings() {
                 $setupfile = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_settings.inc';
-                if ( file_exists( $setupfile ) ) unlink( $setupfile );
-                        file_put_contents( $setupfile, '{ "dragonstats": { "refresh":"' . $_POST['inputRefresh'] . '","auser":"' . $_POST['inputUser'] . '","apass":"' . $_POST['inputPassword'] . '" } }' );
+                if ( file_exists( $setupfile ) )
+			unlink( $setupfile );
+                        
+		file_put_contents( $setupfile, '{ "dragonstats": { "refresh":"' . $_POST['inputRefresh'] . '","auser":"' . $_POST['inputUser'] . '","apass":"' . $_POST['inputPassword'] . '" } }' );
 
                 if ( file_exists( $setupfile ) ) {
                         $error_msg = " Settings Updated.";
@@ -66,13 +68,15 @@
 		return $json['dragonstats'][$_element];
 	}
 
-
-
 	if ( isset( $_POST['btnpost'] ) ) {
-		$_savit = unlink( $_SERVER['DOCUMENT_ROOT'] . '/dragonstats_settings.inc' );
-		if ( $_savit )
-			save_settings();
+		save_settings();
 	} 
+
+        $setup_file = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_settings.inc';
+        if ( !is_file( $setup_file ) ) {
+                file_put_contents( $setup_file, '{ "dragonstats": { "refresh":"60","auser":"","apass":"" } }' );
+        }
+
 
 
 	## load up the existing settings if there are any..
