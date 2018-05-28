@@ -34,7 +34,7 @@ if ( !is_file( $setup_file ) )
 	$initial_setup = true;
 
 if ( !is_file( $setup_file ) ) {
-	file_put_contents( $setup_file, '{ "dragonstats": { "refresh":"60","auser":"","apass":"" } }' );
+	file_put_contents( $setup_file, '{ "dragonstats": { "refresh":"60","otemp":"80","auser":"","apass":"" } }' );
 }
 
 if ( !is_file( $file ) ) {
