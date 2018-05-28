@@ -164,6 +164,12 @@ function get_refresh_setting() {
 	return $_string['dragonstats']['refresh'];
 }
 
+function get_overtemp_setting() {
+	$setupfile = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/dragonstats_settings.inc';
+	$_string = json_decode( file_get_contents( $setupfile ), true );
+	return $_string['dragonstats']['otemp'];
+}
+
 
 ######################### end functions ##################################
 
@@ -208,7 +214,7 @@ if (!file_exists('./lists/dragon_ips.lst')) {
 $ip = get_all_miners();
 
 $refresh_time = get_refresh_setting();
-
+$overtemp = get_overtemp_setting();
 
 ?>
 
