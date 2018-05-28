@@ -132,8 +132,7 @@ foreach( $miners as $miner ) {
         }
 
 	## write out the applying changes first.. then wait till the post returns..
-        echo "Applying changes to: " . $miner . ' IP: ' . $ip . ' ..... ';
-#	echo '' . post_to_miner( $ip, $url, $user, $pass, $auser, $apass ) . "<br>";
+        echo "Applying changes to: " . $miner . ' IP: ' . $ip . ' ..... ' . post_to_miner( $ip, $url, $user, $pass, $auser, $apass ) . "<br>";
 
 
         $cc = $cc + 1;
