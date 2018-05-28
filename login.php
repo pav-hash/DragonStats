@@ -57,7 +57,8 @@ list( $_uname, $_upass ) = explode( ":", $passfile );
       </script>
 
       <title>DragonStats Login</title>
-      <link href = "css/bootstrap.min.css" rel = "stylesheet">
+      <link href = "./css/bootstrap.min.css" rel = "stylesheet">
+      <link href = "./css/dragonstats.css" rel = "stylesheet">
       
       <style>
          body {
