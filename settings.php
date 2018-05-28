@@ -217,20 +217,15 @@
 						</div>
 					</div>
 					</form>
-			
-					<div class="col-md-12 mt-5">
-						<div class="form-group false">
-							<center>
-							Written by pav_hash --  Donations gladly accepted..<br>3CsdpkawMuhSqBrdvCcHacSyuzmjzHVTTR (btc)<br>DsTyn6kv8NjY83LY4RminGTP2TF7DQBpeAw (dcr)
-							</center>
-						</div>
-					</div>
-
 				</div>
 			</div>
 		</div>
 
 	</div>
+
+  <div class="pav_footer">
+  <div class="pavhash">Written by pav_hash --  Donations gladly accepted..<br>3CsdpkawMuhSqBrdvCcHacSyuzmjzHVTTR (btc)<br>DsTyn6kv8NjY83LY4RminGTP2TF7DQBpeAw (dcr)</div>
+  </div>
 	
 <script src="js/jquery.min.js"></script><script src="js/bootstrap.min.js"></script>
 	
