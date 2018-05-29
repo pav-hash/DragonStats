@@ -451,9 +451,11 @@ if ( $alive_test === '' ) {
 			}	
 
 
-			for ($pp = 1; $pp <= 3; $pp++) {
+			$miner_pool = '';
+			for ( $pp = 1; $pp <= 3; $pp++ ) {
 				if ( find_active_stratum("Stratum Active", $pools, $pp) === "True" ) {
 					$miner_miner = find_element("User", $pools, $pp );
+					$miner_pool = find_element( "URL", $pools, $pp );
 					break;
 				}
 			}
@@ -462,6 +464,8 @@ if ( $alive_test === '' ) {
 			echo "<td class='cbi-miner-name'>";
 			if ( $cc == 1 ) {
 				echo "<div id='cbi-miner-name'>" . $miner_miner . $miner_type . "</div>";
+			} elseif ( $cc == 2 ) {
+				echo "<div id='cbi-miner-name'>" . $miner_pool . "</div>";
 			} else {
 				echo "<div id='cbi-miner-name'></div>";
 			}
