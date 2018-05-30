@@ -115,20 +115,24 @@ foreach( $miners as $miner ) {
         $ip = get_key_value( $miner, $query );
         $url = get_key_value( "url", $query );
         $user = get_key_value( "user", $query );
+        $mname = get_key_value( "mname", $query );
         $pass = get_key_value( "pass", $query );
         $auser = get_key_value( "adminuser", $query );
         $apass = get_key_value( "adminpass", $query );
 
+        if ( $mname == '' )
+                $mname = 'dm';
+
         if ( strpos( $user, '.' ) === false ) {
                 #username does not contain a worker name, so lets add one..
-                $user = $user . '.dm' . $cc;
+                $user = $user . '.' . $mname . $cc;
         } else {
                 #username has a worker name.. strip it and we'll add our own ONLY if count( $miners ) > 1..
-		if ( total_miners_submitted == 1 ) {
-			## allow the username to pass through..
-		} else {
-                	$user = substr( $user, 0, stripos( $user, '.' ) ) . '.dm' . $cc;
-		}
+                if ( total_miners_submitted == 1 ) {
+                        ## allow the username to pass through..
+                } else {
+                        $user = substr( $user, 0, stripos( $user, '.' ) ) . '.' . $mname . $cc;
+                }
         }
 
 	## write out the applying changes first.. then wait till the post returns..
