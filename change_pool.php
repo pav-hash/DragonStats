@@ -214,6 +214,12 @@ NOTE: This function only works if ALL your miners have the same admin username a
 			<input type="text" class="form-control form-control-sm" data-pool="0" name="user" value="" id="inputWorker" placeholder="Pool Worker">
 		</div>
 	</div>
+       <div class="form-group false">
+                <label for="inputMname">Worker Name (defaults to: dm1-x)</label>
+                <div class="input-group mb-2">
+                        <input type="text" class="form-control form-control-sm" data-pool="0" name="mname" value="dm" id="inputMname" placeholder="Pool Worker Name (defaults to: dm1-x)">
+                </div>
+        </div>
 	<div class="form-group false">
 		<label for="inputPassword1">Password</label>
 		<div class="input-group mb-2">
