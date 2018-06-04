@@ -3,6 +3,10 @@
 This is designed to be run under linux with either apache or nginx.  The machine could
 be as simple as a raspberry pi!
 
+REQUIREMENTS:
+  A webserver, php, python, nmap, ping.. A base package has most of these installed by default.
+  
+  
 Simply place all the files into a web enabled directory.
 Once that is done, open up a browser and go to:  http://yourdomain.com/DragonStats/login.php
 The default username and password is shown on the login screen for you.
