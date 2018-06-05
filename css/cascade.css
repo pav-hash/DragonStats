@@ -807,7 +807,7 @@ table.cbi-section-table {
 table.cbi-section-table th,
 table.cbi-section-table td {
 	text-align: center;
-	background-color: lime;
+	background-color: #ffffff;
 	margin: 12px 12px 12px 12px;
 	padding: 12px 12px 12px 12px;
 }
