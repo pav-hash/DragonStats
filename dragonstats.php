@@ -77,6 +77,7 @@ if ( isset( $_SESSION['logged_in'] ) and $_SESSION['logged_in'] !== true ) {
 
 
 function get_all_dragon_ips() {
+	global $multi_subnets;
 	if ( !is_dir( $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/lists' ) ) {
 		mkdir( $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF'])  . '/lists', 0755, true );
 	}
